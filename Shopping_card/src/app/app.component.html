@@ -1,0 +1,102 @@
+<body
+  style="background-color: beige;">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Shop</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+ 
+    
+  <div style="text-align: center; margin-top: 0px;margin-left: auto;">
+    <form action="" #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+      <label>Product Name</label><br>
+      <input style="margin-top: 2px;" type="text" name="pname" ngModel><br><br>
+      <label>Product Price</label><br>
+      <input type="text" name="price" ngModel><br><br>
+      <label>Product Quantity</label><br>
+      <input type="text" name="Quantity" ngModel><br><br>
+      <label>Product Description</label><br>
+      <input type="text" name="Desc" ngModel><br><br>
+      <label>Image</label><br>
+      <input type="file" style="margin-left: 5px;" name="img" 
+      
+        (change)="selectedfile($event)" multiple />
+        
+       
+      <br><br>
+      <button type="submit">Submit</button>
+
+
+      <h2 style="background-color:rgb(23, 44, 231);text-align: center;">Product List</h2>
+      <div class="row">
+        <div class="col-sm-6" *ngFor="let i of plist" >
+          <div class="card" >
+            
+            <img  [src]="urllink" style="width: 100%;height:30%" class="card-img-top" alt="...">
+            <div class="card-body">
+              
+              <h5 class="card-title">Product Name:{{i.pname}}</h5>
+              <h5 class="card-title">Price:{{i.price}}</h5>
+              <h5 class="card-title">Description:  {{i.Desc}}</h5>
+              
+
+
+              <div>
+                <button type="button" class="btn-primary" (click)="dec()">-</button>
+                <span>{{Qut}}</span>
+                <button type="button" class="btn-primary" (click)="inc(i)">+</button>
+              </div>
+              <br>
+              <a href="#" class="btn btn-primary" (click)="add_card(i.pname,Qut,i.price,i)">Add Card</a>
+              <a href="#" class="btn btn-danger" (click)="delete_card(i)" style="margin-left: 5%;">Delete Card</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 style="background-color:rgb(17, 20, 219);text-align: center;">Card Deatils</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Product Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total</th>
+            <th scope="col">Grand Total</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let i of itemcard">
+          <tr>
+            <th scope="row">{{i.pname}}</th>
+            <td>{{i.price}}</td>
+            <td>{{i.Quantity}}</td>
+
+            <td>{{i.price*i.Quantity}}</td>
+            <button type="button" class="btn btn-danger" style="color: black;" (click)="ondelete(i)">Remove</button>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+
+  </div>
+
+</body>
